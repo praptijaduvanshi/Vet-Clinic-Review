@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
+const db = require("./db");
 const morgan = require("morgan");
+
 const app = express();
 
 // express middleware
@@ -9,7 +11,9 @@ app.use(express.json());
 const port = process.env.PORT || 3006;
 
 // get all clinics
-app.get("/api/v1/clinics",(request, response) => {
+app.get("/api/v1/clinics", async(request, response) => {
+    const results= await db.query("SELECT * FROM clinics")
+    console.log(results);
     response.status(200).json({
         status: "success",
         data: {
