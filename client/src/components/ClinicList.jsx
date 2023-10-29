@@ -15,6 +15,18 @@ const ClinicList = (props) => {
     fetchData();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await ClinicFinder.delete(`/${id}`)
+      setClinics(clinics.filter(clinic => {
+        return clinic.id !== id
+      }))
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   return (
     <div className="list-group" style={{ margin: '7px' }}>
       <table className="table table-hover table-bordered">
@@ -48,7 +60,7 @@ const ClinicList = (props) => {
               <td>{clinic.established_date}</td>
               <td>Ratings</td>
               <td><button className="btn btn-info">Edit</button></td>
-              <td><button className="btn btn-danger">Delete</button></td>
+              <td><button onClick={() => handleDelete(clinic.id)} className="btn btn-danger">Delete</button></td>
             </tr>
             );
           })}
