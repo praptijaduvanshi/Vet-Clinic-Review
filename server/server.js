@@ -56,10 +56,11 @@ app.post("/api/v1/clinics", async(request, response) => {
             request.body.email,
             request.body.established_date
           ]);
+        console.log(results);
         response.status(201).json({
           status: "success",
           data: {
-            clinics: results.rows[0],
+            clinic: results.rows[0],
           },
         });
       } catch (err) {
