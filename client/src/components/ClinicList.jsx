@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useEffect, useContext } from "react";
+import ClinicFinder from "../apis/ClinicFinder";
+import { ClinicsContext } from "../context/ClinicsContext";
 
 const ClinicList = () => {
+  const {clinics, setClinics} = useContext(ClinicsContext)
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+      const response = await ClinicFinder.get("/");
+      console.log(response);
+    } catch (error) {}
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="list-group" style={{ margin: '7px' }}>
       <table className="table table-hover table-bordered">

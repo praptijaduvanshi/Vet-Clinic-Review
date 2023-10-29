@@ -1,11 +1,13 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const db = require("./db");
 const morgan = require("morgan");
 
 const app = express();
 
 // express middleware
+app.use(cors());
 app.use(express.json());
 
 const port = process.env.PORT || 3006;
@@ -14,10 +16,6 @@ const port = process.env.PORT || 3006;
 app.get("/api/v1/clinics", async (request, response) => {
     try {
       const results = await db.query("SELECT * FROM clinics");
-      console.log(results);
-      //const restaurantRatingsData = await db.query(
-        //"select * from restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id;"
-      //);
       response.status(200).json({
         status: "success",
         results: results.rows.length,
