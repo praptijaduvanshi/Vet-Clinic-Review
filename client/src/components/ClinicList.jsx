@@ -2,14 +2,14 @@ import React, { useEffect, useContext } from "react";
 import ClinicFinder from "../apis/ClinicFinder";
 import { ClinicsContext } from "../context/ClinicsContext";
 
-const ClinicList = () => {
+const ClinicList = (props) => {
   const {clinics, setClinics} = useContext(ClinicsContext)
   
   useEffect(() => {
     const fetchData = async () => {
       try {
       const response = await ClinicFinder.get("/");
-      console.log(response);
+      setClinics(response.data.data.clinics);
     } catch (error) {}
     };
     fetchData();
@@ -35,7 +35,24 @@ const ClinicList = () => {
         </thead>
 
         <tbody>
-          <tr>
+          {clinics && clinics.map((clinic) => {
+            return (
+            <tr key={clinic.id}>
+              <td>{clinic.name}</td>
+              <td>{clinic.address}</td>
+              <td>{clinic.city}</td>
+              <td>{clinic.state}</td>
+              <td>{clinic.open_hours}</td>
+              <td>{clinic.phone_number}</td>
+              <td>{clinic.email}</td>
+              <td>{clinic.established_date}</td>
+              <td>Ratings</td>
+              <td><button className="btn btn-info">Edit</button></td>
+              <td><button className="btn btn-danger">Delete</button></td>
+            </tr>
+            );
+          })}
+          {/*<tr>
             <td>A</td>
             <td>A</td>
             <td>A</td>
@@ -47,7 +64,7 @@ const ClinicList = () => {
             <td>A</td>
             <td><button className="btn btn-info">Edit</button></td>
             <td><button className="btn btn-danger">Delete</button></td>
-          </tr>
+          </tr>*/}
         </tbody>
       </table>
     </div>
