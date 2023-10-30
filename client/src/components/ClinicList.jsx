@@ -1,10 +1,13 @@
 import React, { useEffect, useContext } from "react";
 import ClinicFinder from "../apis/ClinicFinder";
 import { ClinicsContext } from "../context/ClinicsContext";
+import {useNavigate} from "react-router-dom";
 
 const ClinicList = (props) => {
   const {clinics, setClinics} = useContext(ClinicsContext)
-  
+  let navigate = useNavigate()
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,8 +27,11 @@ const ClinicList = (props) => {
     } catch (error) {
       console.log(error);
     }
+  };
 
-  }
+  const handleUpdate = (id) => {
+    navigate(`/clinics/${id}/update`)
+  };
 
   return (
     <div className="list-group" style={{ margin: '7px' }}>
@@ -59,7 +65,7 @@ const ClinicList = (props) => {
               <td>{clinic.email}</td>
               <td>{clinic.established_date}</td>
               <td>Ratings</td>
-              <td><button className="btn btn-info">Edit</button></td>
+              <td><button onClick={() => handleUpdate(clinic.id)} className="btn btn-info">Edit</button></td>
               <td><button onClick={() => handleDelete(clinic.id)} className="btn btn-danger">Delete</button></td>
             </tr>
             );

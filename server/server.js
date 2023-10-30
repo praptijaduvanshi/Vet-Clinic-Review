@@ -35,7 +35,7 @@ app.get("/api/v1/clinics/:id", async(request, response) => {
         response.status(200).json({
           status: "success",
           data: {
-            clinics: results.rows[0],
+            clinic: results.rows[0],
           },
         });
       } catch (err) {
@@ -84,7 +84,7 @@ app.put("/api/v1/clinics/:id", async(request, response) => {
         response.status(200).json({
           status: "success",
           data: {
-            clinics: results.rows[0],
+            clinic: results.rows[0],
           },
         });
       } catch (err) {
