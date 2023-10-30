@@ -1,10 +1,33 @@
 import React, { useState } from 'react';
+import ClinicFinder from '../apis/ClinicFinder';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 const AddReviews = () => {
+    const { id } = useParams();
+    const location = useLocation();
+    console.log(location);
     
+    const navigate = useNavigate();
+    console.log(id);
+
     const [name, setName] = useState("");
     const [reviewText, setReviewText] = useState("");
     const [rating, setRating] = useState("Rating");
+
+    const handleSubmitReview = async (e) => {
+        e.preventDefault();
+        try {
+        const response = await ClinicFinder.post(`/${id}/addReview`, {
+            name,
+            review: reviewText,
+            rating,
+        });
+        window.location.reload(false)
+        //navigate("/");
+        //navigate(location.pathname);
+        } catch (err) {}
+    };
+
   return (
     <div className="mb-2">
         <form action="">
@@ -51,8 +74,8 @@ const AddReviews = () => {
             </div>
             
             <button 
-            //type="submit" 
-            //onClick={handleSubmitReview} 
+            type="submit" 
+            onClick={handleSubmitReview} 
             className="btn btn-primary"> Submit </button>
       </form>
     </div>
