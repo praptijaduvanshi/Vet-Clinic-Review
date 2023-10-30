@@ -57,7 +57,9 @@ const UpdateClinic = (props) => {
 
   return (
     <div>
-      <form className="p-4">
+      <form className="p-2">
+        <h2 className="font-weight-light display-5 text-xl">Update Vet Clinic</h2>
+        
         <div className="form-row">
           <div className="col-md-6 mb-3">
             <label htmlFor="name">Clinic Name</label>

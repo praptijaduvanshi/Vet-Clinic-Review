@@ -18,7 +18,8 @@ const ClinicList = (props) => {
     fetchData();
   }, []);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e,id) => {
+    e.stopPropagation()
     try {
       const response = await ClinicFinder.delete(`/${id}`)
       setClinics(clinics.filter(clinic => {
@@ -29,8 +30,13 @@ const ClinicList = (props) => {
     }
   };
 
-  const handleUpdate = (id) => {
+  const handleUpdate = (e,id) => {
+    e.stopPropagation()
     navigate(`/clinics/${id}/update`)
+  };
+
+  const handleClinicSelect = (id) => {
+    navigate(`/clinics/${id}`)
   };
 
   return (
@@ -55,7 +61,7 @@ const ClinicList = (props) => {
         <tbody>
           {clinics && clinics.map((clinic) => {
             return (
-            <tr key={clinic.id}>
+            <tr onClick={() => {handleClinicSelect(clinic.id)}} key={clinic.id}>
               <td>{clinic.name}</td>
               <td>{clinic.address}</td>
               <td>{clinic.city}</td>
@@ -65,8 +71,8 @@ const ClinicList = (props) => {
               <td>{clinic.email}</td>
               <td>{clinic.established_date}</td>
               <td>Ratings</td>
-              <td><button onClick={() => handleUpdate(clinic.id)} className="btn btn-info">Edit</button></td>
-              <td><button onClick={() => handleDelete(clinic.id)} className="btn btn-danger">Delete</button></td>
+              <td><button onClick={(e) => handleUpdate(e, clinic.id)} className="btn btn-info">Edit</button></td>
+              <td><button onClick={(e) => handleDelete(e, clinic.id)} className="btn btn-danger">Delete</button></td>
             </tr>
             );
           })}

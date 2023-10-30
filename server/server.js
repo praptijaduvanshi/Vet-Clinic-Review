@@ -28,19 +28,33 @@ app.get("/api/v1/clinics", async (request, response) => {
     }
   });
 
-// get a clinic 
-app.get("/api/v1/clinics/:id", async(request, response) => {
-    try {
-        const results = await db.query("SELECT * FROM clinics WHERE id = $1", [request.params.id]);
-        response.status(200).json({
-          status: "success",
-          data: {
-            clinic: results.rows[0],
-          },
-        });
-      } catch (err) {
-        console.log(err);
-      }
+//get a clinic
+app.get("/api/v1/clinics/:id", async (req, res) => {
+  console.log(req.params.id);
+
+  try {
+    const clinic = await db.query(
+      "select * from clinics left join (select clinic_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by clinic_id) reviews on clinics.id = reviews.clinic_id where id = $1",
+      [req.params.id]
+    );
+    // select * from clinics wehre id = req.params.id
+
+    const reviews = await db.query(
+      "select * from reviews where clinic_id = $1",
+      [req.params.id]
+    );
+    console.log(reviews);
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        clinic: clinic.rows[0],
+        reviews: reviews.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // create a clinic
