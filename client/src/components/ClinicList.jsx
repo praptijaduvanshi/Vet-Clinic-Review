@@ -2,6 +2,8 @@ import React, { useEffect, useContext } from "react";
 import ClinicFinder from "../apis/ClinicFinder";
 import { ClinicsContext } from "../context/ClinicsContext";
 import {useNavigate} from "react-router-dom";
+import StarRating from "./StarRating";
+
 
 const ClinicList = (props) => {
   const {clinics, setClinics} = useContext(ClinicsContext)
@@ -39,6 +41,18 @@ const ClinicList = (props) => {
     navigate(`/clinics/${id}`)
   };
 
+  const renderRating = (clinic) => {
+    if (!clinic.count) {
+      return <span className="text-warning">0 reviews</span>;
+    }
+    return (
+      <>
+        <StarRating rating={clinic.average_rating} />
+        <span className="text-warning ml-1">({clinic.count})</span>
+      </>
+    );
+  };
+
   return (
     <div className="list-group" style={{ margin: '7px' }}>
       <table className="table table-hover table-bordered">
@@ -70,7 +84,7 @@ const ClinicList = (props) => {
               <td>{clinic.phone_number}</td>
               <td>{clinic.email}</td>
               <td>{clinic.established_date}</td>
-              <td>Ratings</td>
+              <td>{renderRating(clinic)}</td>
               <td><button onClick={(e) => handleUpdate(e, clinic.id)} className="btn btn-info">Edit</button></td>
               <td><button onClick={(e) => handleDelete(e, clinic.id)} className="btn btn-danger">Delete</button></td>
             </tr>

@@ -13,20 +13,24 @@ app.use(express.json());
 const port = process.env.PORT || 3006;
 
 // get all clinics
-app.get("/api/v1/clinics", async (request, response) => {
-    try {
-      const results = await db.query("SELECT * FROM clinics");
-      response.status(200).json({
-        status: "success",
-        results: results.rows.length,
-        data: {
-          clinics: results.rows,
-        },
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  });
+app.get("/api/v1/clinics", async (req, res) => {
+  try {
+    //const results = await db.query("select * from clinics");
+    const clinicRatingsData = await db.query(
+      "select * from clinics left join (select clinic_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by clinic_id) reviews on clinics.id = reviews.clinic_id;"
+    );
+
+    res.status(200).json({
+      status: "success",
+      results: clinicRatingsData.rows.length,
+      data: {
+        clinics: clinicRatingsData.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //get a clinic
 app.get("/api/v1/clinics/:id", async (req, res) => {
