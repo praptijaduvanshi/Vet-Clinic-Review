@@ -29,7 +29,7 @@ CREATE TABLE reviews (
 -- Insert Good Reviews
 INSERT INTO reviews (clinic_id, name, review, rating)
 VALUES
-    (16, 'John Doe', 'Outstanding service.', 5);
+    (18, 'John Doe', 'Outstanding service.', 5);
 
 -- Insert Bad Reviews
 INSERT INTO reviews (clinic_id, name, review, rating)
