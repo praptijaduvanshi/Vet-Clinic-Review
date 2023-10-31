@@ -36,3 +36,24 @@ INSERT INTO reviews (clinic_id, name, review, rating)
 VALUES
     (18, 'David Wilson', 'Terrible experience at this clinic. The staff was rude, and the vet seemed disinterested. My pet''s condition worsened after the visit. Avoid this place at all costs.', 1);
 
+-- To Delete
+DELETE FROM clinics WHERE id = 1;
+DELETE FROM reviews;
+
+-- Aggregate Functions
+SELECT AVG(rating) FROM reviews;
+
+SELECT clinic_id; count(clinic_id) FROM reviews GROUP BY clinic_id;
+
+SELECT city, COUNT(city) FROM clinics GROUP BY city;
+
+-- Returns all clinics, and their average rating and review count
+SELECT *
+FROM clinic
+    LEFT JOIN(
+        SELECT clinic_id,
+            count(*),
+            TRUNC(AVG(rating, 1)) as average_rating
+        FROM reviews
+        GROUP BY clinic_id
+    ) reviews ON clincs.id = reviews.clinic_id;
