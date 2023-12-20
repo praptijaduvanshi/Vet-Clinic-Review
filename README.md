@@ -8,13 +8,12 @@ The project includes two main tables in the database:
 
 ### Clinics
 
-- Attributes: name, address, city, state, open hours, phone number, email, established date
-- Primary key: clinic id
+- Attributes: clinic id (primary key), name, address, city, state, open hours, phone number, email, established date
 
 ### Reviews
 
-- Attributes: clinic id (foreign key), rating, name of reviewer, review
-- Additional Display: Average rating and count of reviews
+- Attributes: review id (primary key), clinic id (foreign key), rating, name of reviewer, review
+
 
 ## Functionality
 
