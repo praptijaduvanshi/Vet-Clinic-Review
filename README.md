@@ -32,10 +32,39 @@ Future enhancements for PawGo include:
 - **Search and Sorting Features:** Implement the ability to search for clinics and sort them by location.
 - **Additional Tables:** Introduce new tables for vet details and services provided.
 
-## Getting Started
+## Installation
 
-To set up the PawGo project on your local machine, follow these steps:
+To get started with PawGo, follow these steps:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/pawgo.git
+
+    ```bash
+    git clone https://github.com/your-username/pawgo.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd pawgo
+    ```
+
+3. Install project dependencies:
+
+    ```bash
+    npm install
+    ```
+
+## Database Setup
+
+Before running the application, make sure to set up the database:
+
+1. Create a PostgreSQL database.
+
+2. Update the connection details in the server configuration.
+
+## Running the Application
+
+Once the database is set up, you can run the PawGo application:
+
+```bash
+npm start
