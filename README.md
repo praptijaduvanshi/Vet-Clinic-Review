@@ -25,10 +25,9 @@ PawGo supports CRUD operations for clinics, allowing users to:
 - **Delete Clinics:** Remove vet clinics from the platform.
 
 ## Screenshots
-![WhatsApp Image 2024-01-30 at 04 14 41](https://github.com/praptijaduvanshi/PawGO-Vet-Clinic-Review-System/assets/67221447/1fb97703-88ba-4d75-9b64-b032906b69d9)
-![WhatsApp Image 2023-12-17 at 17 43 49 (1)](https://github.com/praptijaduvanshi/PawGO-Vet-Clinic-Review-System/assets/67221447/1b4125e1-1b1a-4687-93a2-5c878c713db8)
-![WhatsApp Image 2023-12-17 at 17 43 48](https://github.com/praptijaduvanshi/PawGO-Vet-Clinic-Review-System/assets/67221447/8b17534d-1a65-4fdd-8847-26b9e4749575)
-
+![Homepage](https://github.com/praptijaduvanshi/PawGO-Vet-Clinic-Review-System/assets/67221447/8b17534d-1a65-4fdd-8847-26b9e4749575)
+![Review page](https://github.com/praptijaduvanshi/PawGO-Vet-Clinic-Review-System/assets/67221447/1b4125e1-1b1a-4687-93a2-5c878c713db8)
+![Database](https://github.com/praptijaduvanshi/PawGO-Vet-Clinic-Review-System/assets/67221447/1fb97703-88ba-4d75-9b64-b032906b69d9)
 ## Future Work
 
 Future enhancements for PawGo include:
